@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  
+ <title>chat</title>
+  
+<h2>Sirpa Limachi Juan Carlos 6176510</h2>
+<h2>paralelo ¨C¨</h2>
+<h1>Chat simple construido con Node</h1>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   
+<script src="/socket.io/socket.io.js"></script>
+   
+<script>
+ var socket = io();
+  $(function(){
+   $("#sendmsg").on('click',function(){
+    var mensaje = $("#mensaje").val();
+    if(mensaje=='') return false;
+      
+    console.log(mensaje)
+    socket.emit('message',mensaje);
+    $("#mensaje").val('').focus();
+   });
+  
+     
+  });
+    
+  socket.on('message',function(msg){
+   $("#listamsg").append($('<li>').text(msg));
+  });
+  
+   
+</script>  
+     
+</head>
+  
+<body>
+<ul id="listamsg"></ul>
+<textarea id ="mensaje" rows="4" cols="50">
+  
+</textarea>
+<button id="sendmsg">Enviar</button>
+  
+</body>
+  
+</html>
